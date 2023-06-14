@@ -11,10 +11,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  //список табов
-  final List<String> nav = ['Мои фото', 'Галерея'];
   //Список ссылок на картинки
-  Map<String, List<String>> img = {
+  Map<String, List<String>> imagesMap = {
     'Мои фото': [
       'https://picsum.photos/1000/303',
       'https://picsum.photos/1000/304',
@@ -59,7 +57,7 @@ class _MyAppState extends State<MyApp> {
               title: const Text('keys'),
               //создаем таббар и берем названия табов из списка - nav
               bottom: TabBar(
-                  tabs: nav
+                  tabs: imagesMap.keys
                       .map((String item) => Tab(
                             text: item,
                           ))
@@ -70,7 +68,7 @@ class _MyAppState extends State<MyApp> {
               //в списке nav создаем ListView виджеты внутри которой будут
               //так же виджеты отображающие картинки полученные из сети
               //списки находятся в map-е названием img, вызыватся каждый по key
-              children: nav
+              children: imagesMap.keys
                   .map(
                     (e) => ListView(
                       //исползуется для сохранения состояния при переключении
@@ -79,7 +77,7 @@ class _MyAppState extends State<MyApp> {
                         //с помощью цикла полученные ссылки будут переданы
                         //создавшиемся виджетам которые отображают картинки
                         //по указанным ссылкам
-                        for (var item in img[e] as List<String>)
+                        for (var item in imagesMap[e] as List<String>)
                           //для красоты используется отступ Padding
                           Padding(
                             padding: const EdgeInsets.all(8.0),
